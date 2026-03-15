@@ -6,12 +6,20 @@ const { DataTypes } = require('sequelize');
 
 require('./models')(sequelize, DataTypes);
 
+
+console.log('Modelos:', Object.keys(sequelize.models));
+// Muestra sus associations
+for (const [name, model] of Object.entries(sequelize.models)) {
+  console.log(`- ${name}:`, typeof model.associate === 'function' ? 'associate OK' : 'sin associate');
+}
+
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// const appRoutes = require(`./routes/index.js`);
-// app.use(`/api/tienda`, appRoutes);
+const appRoutes = require(`./routes/index.routes`);
+app.use(`/api/tienda`, appRoutes);
 
 const PORT = process.env.PORT || 3000;
 

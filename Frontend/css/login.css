@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    height: 100vh;           /* Ocupa toda la altura de la ventana */
+    background: #f0f0f0;
+}
+
+.caja {
+  background: #4CAF50;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
