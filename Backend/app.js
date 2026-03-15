@@ -4,9 +4,15 @@ const cors = require(`cors`);
 const sequelize = require(`./config/database`);
 const { DataTypes } = require('sequelize');
 const path = require("path");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+
 
 require('./models')(sequelize, DataTypes);
-
+const sessionStore = new SequelizeStore({
+  db: sequelize,
+  tableName: "sessions",
+});
 
 console.log('Modelos:', Object.keys(sequelize.models));
 // Muestra sus associations
@@ -18,6 +24,18 @@ for (const [name, model] of Object.entries(sequelize.models)) {
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "algo-secreto",
+    resave: false,
+    saveUninitialized: false,
+    store: sessionStore,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 día
+  })
+);
+
+sessionStore.sync();
 
 const appRoutes = require(`./routes/index.routes`);
 app.use(`/api/tienda`, appRoutes);

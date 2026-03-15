@@ -8,17 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "barbero_id",
         as: "barbero",
       });
-      this.belongsTo(models.sucursal, {
-        foreignKey: "sucursal_id",
-        as: "sucursal",
-      });
     }
   }
   comision_barbero.init(
     {
       cita_id: { type: DataTypes.INTEGER, allowNull: false, unique: true },
       barbero_id: { type: DataTypes.INTEGER, allowNull: false },
-      sucursal_id: { type: DataTypes.INTEGER, allowNull: false },
       base: { type: DataTypes.DECIMAL(12, 2), allowNull: false },
       porcentaje: { type: DataTypes.DECIMAL(6, 4) },
       monto_fijo: { type: DataTypes.DECIMAL(12, 4) },

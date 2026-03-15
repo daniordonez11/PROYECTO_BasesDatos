@@ -16,10 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "servicio_id",
         as: "servicio",
       });
-      this.belongsTo(models.sucursal, {
-        foreignKey: "sucursal_id",
-        as: "sucursal",
-      });
     }
   }
   barbero_servicio.init(

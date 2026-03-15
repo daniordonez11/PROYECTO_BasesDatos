@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'inventario',
     tableName: 'inventarios',
     underscored: true,
+    indexes: [
+    { unique: true, fields: ['producto_id', 'sucursal_id'] }
+  ]
   });
   return inventario;
 };

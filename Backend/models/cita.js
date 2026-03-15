@@ -29,15 +29,6 @@ module.exports = (sequelize, DataTypes) => {
         as: "impuesto",
       });
 
-      // creador/editor (opcional)
-      this.belongsTo(models.usuario, {
-        foreignKey: "created_by",
-        as: "creador",
-      });
-      this.belongsTo(models.usuario, {
-        foreignKey: "updated_by",
-        as: "editor",
-      });
 
       // hasMany / hasOne
       this.hasMany(models.cita_pago, {
@@ -103,22 +94,6 @@ module.exports = (sequelize, DataTypes) => {
 
       notas: { type: DataTypes.STRING(250) },
 
-      // sucursal_id: DataTypes.INTEGER,
-      // cliente_id: DataTypes.INTEGER,
-      // barbero_id: DataTypes.INTEGER,
-      // servicio_id: DataTypes.INTEGER,
-      // fecha_hora_inicio: DataTypes.DATE,
-      // fecha_hora_fin: DataTypes.DATE,
-      // precio_aplicado: DataTypes.DECIMAL,
-      // impuesto_id: DataTypes.INTEGER,
-      // impuesto_monto: DataTypes.DECIMAL,
-      // propina_monto: DataTypes.DECIMAL,
-      // descuento_monto: DataTypes.DECIMAL,
-      // subtotal: DataTypes.DECIMAL,
-      // total: DataTypes.DECIMAL,
-      // estado: DataTypes.STRING,
-      // origen: DataTypes.STRING,
-      // notas: DataTypes.STRING
     },
     {
       sequelize,

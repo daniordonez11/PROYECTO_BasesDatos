@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   producto.init({
-    nombre: { type: DataTypes.STRING, allowNull: false },
+    nombre: { type: DataTypes.STRING(255), allowNull: false },
     categoria_id: { type: DataTypes.INTEGER, allowNull: false },
     codigo_barras: { type: DataTypes.STRING(60), unique: true },
     costo_ult_compra: { type: DataTypes.DECIMAL(12, 2), allowNull: true },

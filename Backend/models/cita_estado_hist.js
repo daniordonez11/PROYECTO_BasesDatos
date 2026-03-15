@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
       },
       motivo: { type: DataTypes.STRING(200) },
-      usuario_id: { type: DataTypes.INTEGER },
+      usuario_id: { type: DataTypes.INTEGER, allowNull: true},
     },
     {
       sequelize,

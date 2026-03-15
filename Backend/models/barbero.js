@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'servicio_id',
         as: 'servicios'
       });
-      this.hasMany(models.cita, { foreignKey: 'barbero_id', as: 'cita' });
+      this.hasMany(models.cita, { foreignKey: 'barbero_id', as: 'citas' });
     }
   }
   barbero.init({
