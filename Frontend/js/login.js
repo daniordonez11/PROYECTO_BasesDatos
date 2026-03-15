@@ -1,32 +1,45 @@
+// js/login.js
+import { API, setToken } from '/js/components/http.global.js';
+
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("#login-form"); // asume que tu form tiene id="login-form"
-    const errorDiv = document.querySelector("#error-message"); // div para mostrar errores
+  const form     = document.getElementById('login-form');
+  const alertBox = document.getElementById('alert-container');
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const username = document.querySelector("#username").value;
-        const password = document.querySelector("#password").value;
+  console.log('login.js cargado'); // ← agregar
+  console.log('API:', API);        // ← agregar
+  console.log('form:', form);
 
-        try {
-            const response = await fetch("/api/tienda/v1/auth/login", {
-                method: "POST",
-                credentials: "include", // IMPORTANTE: incluye cookies de sesión
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, password })
-            });
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    console.log('submit ejecutado'); // ← agregar
 
-            const data = await response.json();
-            if (data.ok) {
-                // Login exitoso: redirige a la página principal
-                window.location.href = "/Frontend/pages/inicio.html";
-            } else {
-                // Muestra error
-                errorDiv.textContent = data.error || "Error en login";
-            }
-        } catch (error) {
-            errorDiv.textContent = "Error de conexión";
-        }
-    });
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        console.log('haciendo fetch a:', `${API}/auth/login`);
+      const res = await fetch(`${API}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      console.log('respuesta status:', res.status);
+      const data = await res.json();
+      console.log('data:', data);
+
+      if (data.ok) {
+        setToken(data.token); // guardar JWT en localStorage
+        window.location.href = '/pages/inicio.html';
+      } else {
+        alertBox.innerHTML = `
+          <div class="alert alert-danger">${data.error || 'Credenciales inválidas'}</div>`;
+      }
+
+    } catch (err) {
+        console.error('Error catch:', err);
+      alertBox.innerHTML = `
+        <div class="alert alert-danger">Error de conexión</div>`;
+    }
+  });
 });

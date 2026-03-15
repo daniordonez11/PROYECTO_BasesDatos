@@ -4,7 +4,10 @@ import {
   createSucursal,
   updateSucursal,
   deleteSucursal
-} from './API/api.sucursales.js';
+} from '/js/API/api.sucursales.js';
+
+console.log('Token actual:', localStorage.getItem('token'));
+console.log('sucursales.js cargado');
 
 let sucursales = []; 
 let sucursalesCopia = []; 

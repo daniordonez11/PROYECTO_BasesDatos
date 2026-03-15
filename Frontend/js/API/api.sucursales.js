@@ -1,13 +1,24 @@
 
-import { API } from '../components/http.global.js';
+import { API, getToken } from '/js/components/http.global.js';
 
 // Pequeño ayudante para manejar respuestas y errores
 async function request(path, { method = 'GET', body } = {}) {
+  console.log('Token en request:', getToken()); // ← agregar
+  console.log('URL:', `${API}${path}`);
   const res = await fetch(`${API}${path}`, {
     method,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    },
     body: body ? JSON.stringify(body) : undefined,
   });
+  if (res.status === 401) {
+    localStorage.removeItem('token');
+    window.location.href = '/Frontend/pages/login.html';
+    return null;
+  }
+
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new Error(text || `HTTP ${res.status}`);
