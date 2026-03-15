@@ -3,6 +3,7 @@ const express = require(`express`);
 const cors = require(`cors`);
 const sequelize = require(`./config/database`);
 const { DataTypes } = require('sequelize');
+const path = require("path");
 
 require('./models')(sequelize, DataTypes);
 
@@ -20,8 +21,14 @@ app.use(express.json());
 
 const appRoutes = require(`./routes/index.routes`);
 app.use(`/api/tienda`, appRoutes);
+app.use(express.static(path.join(__dirname, "../Frontend"))); 
 
 const PORT = process.env.PORT || 3000;
+
+// Serve the login page for any unmatched route (SPA fallback)
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/pages/login.html"));
+});
 
 (async () => {
   try {
