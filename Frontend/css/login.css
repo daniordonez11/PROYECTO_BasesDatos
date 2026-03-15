@@ -1,14 +1,343 @@
-.container {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center;     /* Centra verticalmente */
-    height: 100vh;           /* Ocupa toda la altura de la ventana */
-    background: #f0f0f0;
+/* =============================================
+   BARBERIA PARIS — LOGIN STYLES
+   Archivo: login.css
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Jost:wght@300;400;500;600&display=swap');
+
+/* ── Variables ──────────────────────────────── */
+:root {
+  --lg-bg:          #0a0a0a;
+  --lg-panel-l:     #0e0e0e;
+  --lg-panel-r:     #131313;
+  --lg-border:      #252525;
+  --lg-border-lt:   #303030;
+  --lg-text:        #eeeeee;
+  --lg-text-muted:  #606060;
+  --lg-text-dim:    #999999;
+  --lg-white:       #ffffff;
+  --lg-accent:      #ffffff;
+
+  --lg-input-bg:    #1a1a1a;
+  --lg-input-focus: #202020;
+  --lg-btn-bg:      #1e1e1e;
+  --lg-btn-hover:   #2a2a2a;
+
+  --lg-font-display: 'Playfair Display', Georgia, serif;
+  --lg-font-body:    'Jost', sans-serif;
+  --lg-transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.caja {
-  background: #4CAF50;
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
+/* ── Reset ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--lg-bg);
+  font-family: var(--lg-font-body);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Layout principal ───────────────────────── */
+.login-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ── Panel izquierdo — branding ─────────────── */
+.login-brand {
+  background: var(--lg-panel-l);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  overflow: hidden;
+  border-right: 1px solid var(--lg-border);
+}
+
+/* Patrón hexagonal de fondo */
+.login-brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 28px,
+      rgba(255,255,255,.018) 28px,
+      rgba(255,255,255,.018) 29px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      transparent,
+      transparent 28px,
+      rgba(255,255,255,.018) 28px,
+      rgba(255,255,255,.018) 29px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(255,255,255,.018) 28px,
+      rgba(255,255,255,.018) 29px
+    );
+  pointer-events: none;
+}
+
+/* Viñeta radial para profundidad */
+.login-brand::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.65) 100%);
+  pointer-events: none;
+}
+
+/* Logo */
+.login-logo {
+  position: relative;
+  z-index: 1;
+  animation: lgFadeIn 0.8s ease both;
+}
+
+.login-logo img {
+  width: 260px;
+  max-width: 80%;
+  height: auto;
+  filter: invert(1) brightness(1.05);
+  display: block;
+  margin: 0 auto;
+  drop-shadow: 0 0 40px rgba(255,255,255,.1);
+}
+
+/* Tagline bajo el logo */
+.login-tagline {
+  position: relative;
+  z-index: 1;
+  margin-top: 2rem;
+  text-align: center;
+  animation: lgFadeIn 0.8s 0.2s ease both;
+}
+
+.login-tagline p {
+  font-family: var(--lg-font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--lg-text-muted);
+  margin: 0;
+}
+
+.login-tagline span {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--lg-border-lt);
+  margin: 0.85rem auto 0;
+}
+
+/* ── Panel derecho — formulario ─────────────── */
+.login-form-panel {
+  background: var(--lg-panel-r);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  animation: lgSlideIn 0.6s 0.1s ease both;
+}
+
+/* Encabezado del form */
+.login-card-header {
+  margin-bottom: 2.4rem;
+}
+
+.login-card-header h1 {
+  font-family: var(--lg-font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--lg-white);
+  letter-spacing: 0.03em;
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
+}
+
+.login-card-header p {
+  font-size: 0.8rem;
+  color: var(--lg-text-muted);
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+/* Separador decorativo */
+.login-separator {
+  width: 36px;
+  height: 2px;
+  background: var(--lg-white);
+  opacity: 0.18;
+  margin: 0.9rem 0 0;
+  border-radius: 1px;
+}
+
+/* Labels */
+.login-label {
+  display: block;
+  font-family: var(--lg-font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lg-text-muted);
+  margin-bottom: 0.45rem;
+}
+
+/* Wrapper input con ícono */
+.login-input-wrap {
+  position: relative;
+  margin-bottom: 1.3rem;
+}
+
+.login-input-wrap svg {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--lg-text-muted);
+  pointer-events: none;
+  transition: color var(--lg-transition);
+}
+
+.login-input-wrap:focus-within svg { color: var(--lg-text-dim); }
+
+.login-input {
+  width: 100%;
+  background: var(--lg-input-bg);
+  border: 1px solid var(--lg-border-lt);
+  border-radius: 3px;
+  color: var(--lg-text);
+  font-family: var(--lg-font-body);
+  font-size: 0.88rem;
+  padding: 0.62rem 0.9rem 0.62rem 2.5rem;
+  transition: border-color var(--lg-transition), background var(--lg-transition);
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.login-input::placeholder { color: var(--lg-text-muted); font-size: 0.82rem; }
+
+.login-input:focus {
+  border-color: var(--lg-text-dim);
+  background: var(--lg-input-focus);
+  color: var(--lg-white);
+}
+
+/* Botón submit */
+.login-btn {
+  width: 100%;
+  background: var(--lg-white);
+  color: #0a0a0a;
+  border: none;
+  border-radius: 3px;
+  font-family: var(--lg-font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.78rem 1rem;
+  cursor: pointer;
+  margin-top: 0.4rem;
+  transition: background var(--lg-transition), opacity var(--lg-transition), transform var(--lg-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background var(--lg-transition);
+}
+
+.login-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.login-btn:active { transform: translateY(0); opacity: 1; }
+
+/* Alertas */
+#alert-container .alert {
+  font-family: var(--lg-font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  border-radius: 3px;
+  border: none;
+  padding: 0.7rem 1rem;
+  margin-top: 1rem;
+  animation: lgFadeIn 0.2s ease both;
+}
+
+#alert-container .alert-danger {
+  background: rgba(180, 50, 50, .12);
+  color: #e07070;
+  border-left: 3px solid #cc3f3f;
+}
+
+#alert-container .alert-success {
+  background: rgba(58,125,90,.12);
+  color: #7ecba0;
+  border-left: 3px solid #3a7d5a;
+}
+
+/* Pie del card */
+.login-footer {
+  margin-top: 2rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--lg-border);
+  text-align: center;
+}
+
+.login-footer p {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--lg-text-muted);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Animaciones ────────────────────────────── */
+@keyframes lgFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lgSlideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 768px) {
+  body { overflow: auto; }
+  .login-wrapper { grid-template-columns: 1fr; }
+
+  .login-brand {
+    padding: 2.5rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--lg-border);
+  }
+
+  .login-logo img { width: 160px; }
+  .login-tagline { margin-top: 1rem; }
+
+  .login-form-panel { padding: 2.5rem 1.5rem; }
+  .login-card { max-width: 100%; }
 }

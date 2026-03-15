@@ -1,0 +1,385 @@
+/* =============================================
+   BARBERIA PARIS — GLOBAL / SUCURSALES
+   Reemplaza: css.css
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500;600&display=swap');
+
+/* ── Variables globales ─────────────────────── */
+:root {
+  --bg:           #0e0e0e;
+  --bg-card:      #161616;
+  --bg-card-2:    #1c1c1c;
+  --border:       #2a2a2a;
+  --border-light: #333333;
+  --text:         #eeeeee;
+  --text-muted:   #666666;
+  --text-dim:     #999999;
+  --white:        #ffffff;
+  --accent:       #ffffff;
+
+  /* Acciones */
+  --clr-edit:     #4a90d9;
+  --clr-edit-bg:  rgba(74,144,217,.10);
+  --clr-del:      #cc3f3f;
+  --clr-del-bg:   rgba(204,63,63,.10);
+  --clr-save:     #3a7d5a;
+  --clr-save-bg:  rgba(58,125,90,.12);
+  --clr-cancel:   #444444;
+
+  /* Tipografía */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Jost', sans-serif;
+
+  --radius:       3px;
+  --transition:   0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset base ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* ── Contenedor principal ───────────────────── */
+.c {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* ── Título de página ───────────────────────── */
+.c h1 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.04em;
+  margin: 0;
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+.c h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--white);
+  opacity: 0.5;
+}
+
+/* ── Header row (título + buscador) ─────────── */
+.d-flex.justify-content-between {
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Buscador del header */
+.d-flex.justify-content-between .d-flex.ms-auto {
+  gap: 0.5rem;
+}
+
+.d-flex.justify-content-between .form-control {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius);
+  padding: 0.42rem 0.85rem;
+  transition: border-color var(--transition);
+  width: 200px;
+}
+
+.d-flex.justify-content-between .form-control::placeholder { color: var(--text-muted); }
+.d-flex.justify-content-between .form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--text-dim);
+  background: var(--bg-card-2);
+}
+
+#buscar-sucursal {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 0.42rem 1rem;
+  transition: color var(--transition), border-color var(--transition);
+  cursor: pointer;
+}
+
+#buscar-sucursal:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+/* ── TABLA ──────────────────────────────────── */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  margin-top: 1.5rem;
+  animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Thead */
+.table thead.table-secondary tr {
+  background: transparent !important;
+}
+
+.table thead th {
+  background: var(--bg-card) !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-light) !important;
+  border-top: none !important;
+  white-space: nowrap;
+}
+
+.table thead th:first-child { border-radius: var(--radius) 0 0 0; }
+.table thead th:last-child  { border-radius: 0 var(--radius) 0 0; }
+
+/* Tbody rows */
+.table tbody tr {
+  transition: background var(--transition);
+}
+
+.table tbody tr td {
+  background: var(--bg-card);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border) !important;
+  border-top: none !important;
+  vertical-align: middle;
+}
+
+.table tbody tr:hover td {
+  background: var(--bg-card-2);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.table tbody tr:last-child td:first-child { border-radius: 0 0 0 var(--radius); }
+.table tbody tr:last-child td:last-child  { border-radius: 0 0 var(--radius) 0; }
+
+/* Cargando state */
+.table tbody td.text-center {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  padding: 2.5rem 1rem;
+}
+
+/* ── BOTONES DE ACCIÓN (editar / eliminar) ──── */
+.btn-accion {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 0.32rem 0.75rem;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.btn-accion:active { transform: scale(0.96); }
+
+/* Editar */
+.btn-editar {
+  color: var(--clr-edit);
+  border-color: rgba(74,144,217,.35);
+  background: var(--clr-edit-bg);
+}
+
+.btn-editar:hover {
+  background: rgba(74,144,217,.2);
+  border-color: var(--clr-edit);
+  color: #7ab3e8;
+}
+
+/* Eliminar */
+.btn-eliminar {
+  color: var(--clr-del);
+  border-color: rgba(204,63,63,.35);
+  background: var(--clr-del-bg);
+}
+
+.btn-eliminar:hover {
+  background: rgba(204,63,63,.22);
+  border-color: var(--clr-del);
+  color: #e06060;
+}
+
+/* Wrapper para los dos botones en la celda */
+.acciones-celda {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* ── FORMULARIO ─────────────────────────────── */
+#form-sucursal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.5rem;
+  margin-top: 2rem;
+  animation: fadeUp 0.3s ease both;
+  position: relative;
+}
+
+/* Línea decorativa superior */
+#form-sucursal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--white) 0%, transparent 60%);
+  opacity: 0.15;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* Labels */
+#form-sucursal .form-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+/* Inputs */
+#form-sucursal .form-control {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-light);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  border-radius: var(--radius);
+  padding: 0.5rem 0.85rem;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+#form-sucursal .form-control::placeholder { color: var(--text-muted); }
+
+#form-sucursal .form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--text-dim);
+  background: #202020;
+  color: var(--white);
+}
+
+/* Botón Guardar */
+#form-sucursal .btn-success {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--clr-save);
+  border: 1px solid var(--clr-save);
+  color: #d4f0e4;
+  border-radius: var(--radius);
+  padding: 0.5rem 1.2rem;
+  transition: background var(--transition), border-color var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#form-sucursal .btn-success:hover {
+  background: #48996e;
+  border-color: #48996e;
+  color: #fff;
+}
+
+/* Botón Cancelar */
+#form-sucursal .btn-outline-secondary {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--clr-cancel);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  transition: border-color var(--transition), color var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#form-sucursal .btn-outline-secondary:hover {
+  border-color: var(--text-dim);
+  color: var(--text);
+}
+
+/* ── ALERTAS ────────────────────────────────── */
+#alert-container .alert {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius);
+  border: none;
+  padding: 0.75rem 1.1rem;
+  animation: fadeUp 0.25s ease both;
+}
+
+#alert-container .alert-success {
+  background: rgba(58,125,90,.15);
+  color: #7ecba0;
+  border-left: 3px solid var(--clr-save);
+}
+
+#alert-container .alert-danger {
+  background: rgba(204,63,63,.12);
+  color: #e07070;
+  border-left: 3px solid var(--clr-del);
+}
+
+/* ── Scrollbar custom ───────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }

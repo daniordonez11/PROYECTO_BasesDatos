@@ -1,62 +1,80 @@
-<!-- Barra de arriba -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid" >
+<!-- ============================================================
+     BARBERIA PARIS — NAVBAR
+     Requiere: Bootstrap 5, navbar.css
+     ============================================================ -->
 
-            <!-- Logo Izquierda -->
-            <a class="navbar-brand" href="#">BARBERIA PARIS</a>
+<!-- Google Fonts (agregar en <head> si no está ya) -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"> -->
+<!-- <link rel="stylesheet" href="navbar.css"> -->
 
-            <!-- Boton -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar navbar-expand-lg nb-navbar">
+  <div class="container-fluid">
 
-            <!-- Colapsable -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Contenedor -->
-                 <div class="container-xxl" style="justify-self: center;">
-                    <ul class="navbar-nav mx-auto mb-4 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/Frontend/pages/inicio.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Frontend/pages/pruebas.html">Sucursal</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Opciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
-                 </div>
-                
+    <!-- ── Logo ── -->
+    <a class="nb-brand" href="/Frontend/pages/inicio.html">
+      <img src="/Frontend/assets/img/PARIS.png" alt="Paris Barber Shop">
+    </a>
 
-                <ul class="navbar-nav mx-auto mb-8 mb-lg-0">
-                    <li class="item">
-                        <button class="btn btn-danger" type="submit">Cerrar Sesion</button>
-                    </li>
-                    <br>
-                    <li class="item">
-                        <form class="d-flex ms-auto">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </li>
-                </form>
-                </ul>
-                
-            </div>
+    <!-- ── Toggler mobile ── -->
+    <button class="navbar-toggler nb-toggler" type="button"
+      data-bs-toggle="collapse" data-bs-target="#nbCollapse"
+      aria-controls="nbCollapse" aria-expanded="false" aria-label="Menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- ── Contenido colapsable ── -->
+    <div class="collapse navbar-collapse nb-collapse" id="nbCollapse">
+
+      <!-- Nav principal -->
+      <ul class="nb-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/Frontend/pages/inicio.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Frontend/pages/pruebas.html">Sucursal</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="nbDropdown"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Servicios
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="nbDropdown">
+            <li><a class="dropdown-item" href="#">Corte de cabello</a></li>
+            <li><a class="dropdown-item" href="#">Afeitado clásico</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Reservar cita</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Galería</a>
+        </li>
+      </ul>
+
+      <!-- Separador visual -->
+      <div class="nb-divider"></div>
+
+      <!-- Acciones derechas -->
+      <div class="nb-actions">
+
+        <!-- Buscador -->
+        <div class="nb-search">
+          <input type="search" placeholder="Buscar…" aria-label="Buscar">
+          <button type="button" aria-label="Ir">
+            <!-- Ícono lupa SVG inline -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
         </div>
-    </nav>
+
+        <!-- Cerrar sesión -->
+        <button class="nb-btn-logout" type="button">
+          Cerrar sesión
+        </button>
+
+      </div>
+    </div><!-- /collapse -->
+  </div>
+</nav>
