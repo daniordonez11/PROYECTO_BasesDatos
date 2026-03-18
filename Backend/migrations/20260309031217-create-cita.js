@@ -30,13 +30,6 @@ module.exports = {
         onUpdate: 'CASCADE', 
         onDelete: 'RESTRICT' 
       },
-      servicio_id: {
-        type: Sequelize.INTEGER, 
-        allowNull: false,
-        references: { model: 'servicio', key: 'id' }, 
-        onUpdate: 'CASCADE', 
-        onDelete: 'RESTRICT' 
-      },
       fecha_hora_inicio: {
         type: Sequelize.DATE, 
         allowNull: false

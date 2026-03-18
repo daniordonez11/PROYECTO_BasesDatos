@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inventario — Paris Barber Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/table-form.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+  <div id="navbar"></div>
+  <div class="c">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>Inventario</h1>
+      <form class="d-flex ms-auto">
+        <input class="form-control me-2" type="search" placeholder="Buscar producto o sucursal..." aria-label="Search">
+        <button class="btn" id="buscar-inventario" type="submit">Buscar</button>
+      </form>
+    </div>
+
+    <table class="table table-hover align-middle">
+      <thead class="table-secondary">
+        <tr>
+          <th>Producto</th>
+          <th>Sucursal</th>
+          <th>Stock actual</th>
+          <th>Stock minimo</th>
+          <th>Stock maximo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-inventario">
+        <tr><td colspan="6" class="text-center">Cargando...</td></tr>
+      </tbody>
+    </table>
+
+    <form id="form-inventario" class="row g-2 mt-3">
+      <input type="hidden" id="id" />
+
+      <div class="col-md-4">
+        <label for="producto_id" class="form-label">Producto</label>
+        <select id="producto_id" class="form-select">
+          <option value="">-- Producto --</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="sucursal_id" class="form-label">Sucursal</label>
+        <select id="sucursal_id" class="form-select">
+          <option value="">-- Sucursal --</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <label for="stock" class="form-label">Stock actual</label>
+        <input id="stock" class="form-control" type="number" min="0" step="0.01" placeholder="0" required />
+      </div>
+
+      <div class="col-md-1">
+        <label for="stock_min" class="form-label">Min</label>
+        <input id="stock_min" class="form-control" type="number" min="0" step="0.01" placeholder="0" />
+      </div>
+
+      <div class="col-md-1">
+        <label for="stock_max" class="form-label">Max</label>
+        <input id="stock_max" class="form-control" type="number" min="0" step="0.01" placeholder="0" />
+      </div>
+
+      <div class="col-12 col-md-auto d-flex align-items-end gap-2">
+        <button type="submit" class="btn-form btn-form-save">Guardar</button>
+        <button type="button" id="btn-cancelar" class="btn-form btn-form-cancel">Cancelar</button>
+      </div>
+    </form>
+
+    <div class="mt-4">
+  <h6 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);
+    border-bottom:1px solid #222;padding-bottom:0.5rem;margin-bottom:1rem;">
+    Historial de Movimientos
+  </h6>
+  <table class="table table-hover align-middle">
+    <thead class="table-secondary">
+      <tr>
+        <th>Fecha</th>
+        <th>Producto</th>
+        <th>Sucursal</th>
+        <th>Tipo</th>
+        <th>Cantidad</th>
+        <th>Usuario</th>
+        <th>Nota</th>
+      </tr>
+    </thead>
+    <tbody id="tbody-movimientos">
+      <tr><td colspan="7" class="text-center">Cargando...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+    <div id="alert-container" class="mt-3"></div>
+  </div>
+
+  <script src="/js/components/navbar_loader.js"></script>
+  <script type="module" src="/js/Inventario/inventario.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

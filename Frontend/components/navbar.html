@@ -1,11 +1,3 @@
-<!-- ============================================================
-     BARBERIA PARIS — NAVBAR
-     Requiere: Bootstrap 5, navbar.css
-     ============================================================ -->
-
-<!-- Google Fonts (agregar en <head> si no está ya) -->
-<!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"> -->
-<!-- <link rel="stylesheet" href="navbar.css"> -->
 
 <nav class="navbar navbar-expand-lg nb-navbar">
   <div class="container-fluid">
@@ -31,18 +23,29 @@
           <a class="nav-link active" aria-current="page" href="/pages/inicio.html">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pages/pruebas.html">Sucursal</a>
+          <a class="nav-link active" aria-current="page" href="/pages/citas.html">Citas</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="nbDropdown"
+        <li class="nav-item">
+          <a class="nav-link dropdown-toggle" href="#" id="nbDropdownEditar"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Servicios
+            Editar
           </a>
           <ul class="dropdown-menu" aria-labelledby="nbDropdown">
-            <li><a class="dropdown-item" href="#">Corte de cabello</a></li>
-            <li><a class="dropdown-item" href="#">Afeitado clásico</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Reservar cita</a></li>
+            <li><a class="nav-link" href="/pages/barberos.html">Barberos</a></li>
+            <li><a class="nav-link" href="/pages/usuario.html">Usuarios</a></li>
+            <li><a class="nav-link" href="/pages/sucursales.html">Sucursales</a></li>
+            <li><a class="nav-link" href="/pages/servicios.html">Servicios</a></li>
+            <li><a class="nav-link" href="/pages/clientes.html">Clientes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="nbDropdownInventario"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Inventario
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="nbDropdown">
+            <li><a class="nav-link" href="/pages/inventario.html">Inventario</a></li>
+            <li><a class="nav-link" href="/pages/productos.html">Productos</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -57,17 +60,6 @@
       <div class="nb-actions">
 
         <!-- Buscador -->
-        <div class="nb-search">
-          <input type="search" placeholder="Buscar…" aria-label="Buscar">
-          <button type="button" aria-label="Ir">
-            <!-- Ícono lupa SVG inline -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-              viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-          </button>
-        </div>
 
         <!-- Cerrar sesión -->
         <button class="nb-btn-logout" type="button">

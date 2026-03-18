@@ -20,14 +20,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "barbero_id",
         as: "barbero",
       });
-      this.belongsTo(models.servicio, {
-        foreignKey: "servicio_id",
-        as: "servicio",
-      });
       this.belongsTo(models.impuesto, {
         foreignKey: "impuesto_id",
         as: "impuesto",
       });
+      this.hasMany(models.cita_servicio, { foreignKey: 'cita_id', as: 'servicios', onDelete: 'CASCADE' });
 
 
       // hasMany / hasOne
@@ -41,11 +38,6 @@ module.exports = (sequelize, DataTypes) => {
         as: "estados",
         onDelete: "CASCADE",
       });
-      this.hasOne(models.comision_barbero, {
-        foreignKey: "cita_id",
-        as: "comision",
-        onDelete: "CASCADE",
-      });
     }
   }
   cita.init(
@@ -53,7 +45,6 @@ module.exports = (sequelize, DataTypes) => {
       sucursal_id: { type: DataTypes.INTEGER, allowNull: false },
       cliente_id: { type: DataTypes.INTEGER, allowNull: false },
       barbero_id: { type: DataTypes.INTEGER, allowNull: false },
-      servicio_id: { type: DataTypes.INTEGER, allowNull: false },
 
       fecha_hora_inicio: { type: DataTypes.DATE, allowNull: false },
       fecha_hora_fin: { type: DataTypes.DATE, allowNull: false },

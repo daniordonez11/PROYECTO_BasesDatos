@@ -4,6 +4,7 @@ const cors = require('cors');
 const sequelize = require('./config/database');
 const { DataTypes } = require('sequelize');
 const path = require('path');
+const seed = require('./seeders/seed');
 
 require('./models')(sequelize, DataTypes);
 
@@ -14,6 +15,13 @@ app.use(express.json());
 // 1️⃣ Primero archivos estáticos
 console.log('Static sirviendo desde:', path.join(__dirname, "../Frontend"));
 app.use(express.static(path.join(__dirname, "../Frontend")));
+
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
 
 // 2️⃣ Luego rutas API
 const appRoutes = require('./routes/index.routes');
@@ -37,8 +45,9 @@ const PORT = process.env.PORT || 3000;
   try {
     await sequelize.authenticate();
     console.log('✅ Conectado a la BD');
-    await sequelize.sync({ logging: false }); // ← quita el logging para limpiar consola
+    await sequelize.sync({ logging: false }); // force: true, ← PARA REINICIAR TABLAS
     console.log('✅ Tablas sincronizadas');
+    await seed(sequelize);
     app.listen(PORT, () => {
       console.log(`🚀 Servidor en http://localhost:${PORT}`);
     });

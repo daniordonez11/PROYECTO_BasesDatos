@@ -1,8 +1,8 @@
 const sequelize = require('../../config/database');
-const Barbero = sequelize.models.barbero;
 
 const createBarbero = async (req, res) => {
     try {
+        const Barbero = sequelize.models.barbero;
         const barbero = await Barbero.create(req.body);
         res.status(201).json(barbero || {});
     } catch (error) {
@@ -14,6 +14,7 @@ const createBarbero = async (req, res) => {
 
 const getBarberos = async (req, res) => {
     try {
+        const Barbero = sequelize.models.barbero;
         const barberos = await Barbero.findAll();
         res.status(200).json(barberos);
     } catch (error) {
@@ -25,6 +26,7 @@ const getBarberos = async (req, res) => {
 
 const getBarberoById = async (req, res) => {
     try {
+        const Barbero = sequelize.models.barbero;
         const barbero = await Barbero.findByPk(req.params.id);
         if (!barbero) {
             return res.status(404).json({
@@ -41,6 +43,7 @@ const getBarberoById = async (req, res) => {
 
 const updateBarbero = async (req, res) => {
     try {
+        const Barbero = sequelize.models.barbero;
         const barbero = await Barbero.findByPk(req.params.id);
         if (!barbero) {
             return res.status(404).json({
@@ -58,6 +61,7 @@ const updateBarbero = async (req, res) => {
 
 const deleteBarbero = async (req, res) => {
     try {
+        const Barbero = sequelize.models.barbero;
         const barbero = await Barbero.findByPk(req.params.id);
         if (!barbero) {
             return res.status(404).json({
@@ -73,10 +77,33 @@ const deleteBarbero = async (req, res) => {
     }
 };
 
+const getUsuariosDisponibles = async (req, res) => {
+  try {
+    const Usuario = sequelize.models.usuario;
+    const Barbero = sequelize.models.barbero;
+
+    const barberos = await Barbero.findAll({ attributes: ['usuario_id'] });
+    const idsOcupados = barberos.map(b => b.usuario_id);
+
+    const usuarios = await Usuario.findAll({
+      where: {
+        id: { [require('sequelize').Op.notIn]: idsOcupados.length ? idsOcupados : [0] },
+        is_activo: true
+      },
+      attributes: ['id', 'nombre', 'username']
+    });
+
+    res.json(usuarios);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
     createBarbero,
     getBarberos,
     getBarberoById,
     updateBarbero,
-    deleteBarbero
+    deleteBarbero,
+    getUsuariosDisponibles
 };

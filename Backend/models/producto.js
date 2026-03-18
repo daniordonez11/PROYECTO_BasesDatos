@@ -22,10 +22,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "producto_id",
         as: "movimiento_inventario",
       });
-      this.hasMany(models.recepcion_compra_det, {
-        foreignKey: "producto_id",
-        as: "recepcion_compra_det",
-      });
     }
   }
   producto.init({
@@ -34,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     codigo_barras: { type: DataTypes.STRING(60), unique: true },
     costo_ult_compra: { type: DataTypes.DECIMAL(12, 2), allowNull: true },
     precio_venta: { type: DataTypes.DECIMAL(12, 2), allowNull: true },
-    controla_caducidad: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     activo: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }
   }, {
     sequelize,

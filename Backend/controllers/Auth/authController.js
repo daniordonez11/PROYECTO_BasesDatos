@@ -3,20 +3,22 @@ const jwt = require('jsonwebtoken');
 const { secret, expiresIn } = require('../../config/jwt');
 const sequelize = require('../../config/database');
 
-exports.login = async (req, res) => {
+const getModel = () => sequelize.models.usuario;
+const getRol   = () => sequelize.models.rol;
+const getBarbero = () => sequelize.models.barbero;
+
+const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password)
       return res.status(400).json({ ok: false, error: 'Username y password requeridos' });
 
-    const { usuario, rol, barbero } = sequelize.models; // ← así
-
     // Traer usuario con su rol y barbero
-    const user = await usuario.findOne({
+    const user = await getModel().findOne({
       where: { username },
       include: [
-        { model: rol,     as: 'rol' },
-        { model: barbero, as: 'barbero' }
+        { model: getRol(),     as: 'rol' },
+        { model: getBarbero(), as: 'barbero' }
       ]
     });
 
@@ -43,20 +45,26 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.logout = (req, res) => {
+const logout = (req, res) => {
   // Con JWT el logout es responsabilidad del frontend (borrar el token)
   res.json({ ok: true, message: 'Sesión cerrada' });
 };
 
-exports.me = async (req, res) => {
+const me = async (req, res) => {
   // req.usuario viene del middleware verificarToken
   try {
-    const user = await usuario.findByPk(req.usuario.id, {
+    const user = await getModel().findByPk(req.usuario.id, {
       attributes: ['id', 'username', 'nombre', 'email'],
-      include: [{ model: rol, as: 'rol' }]
+      include: [{ model: getRol(), as: 'rol' }]
     });
     res.json({ ok: true, user });
   } catch (error) {
     res.status(500).json({ ok: false, error: error.message });
   }
+};
+
+module.exports = {
+  login,
+  logout,
+  me
 };

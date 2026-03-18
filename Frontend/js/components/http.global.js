@@ -9,7 +9,9 @@ export const clearToken = () => localStorage.removeItem('token');
 
 // ── Sesión ────────────────────────────────────
 export const verificarSesion = () => {
-  if (!getToken()) window.location.href = '/Frontend/pages/login.html';
+  if (!getToken()) {
+    window.location.replace('/pages/login.html');
+  } 
 };
 
 // ── Fetch con token automático ────────────────
@@ -37,4 +39,23 @@ export const apiFetch = async (endpoint, options = {}) => {
 export const logout = () => {
   clearToken();
   window.location.href = '/Frontend/pages/login.html';
+};
+
+export const getUsuarioActual = () => {
+  const token = getToken();
+  if (!token) return null;
+  try {
+    // Decodificar payload del JWT (sin verificar firma)
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload;
+  } catch {
+    return null;
+  }
+};
+
+export const soloAdmin = () => {
+  const user = getUsuarioActual();
+  if (!user || user.rol !== 'Administrador') {
+    window.location.replace('/pages/citas.html');
+  }
 };

@@ -1,10 +1,14 @@
 // Frontend/js/sucursales.js
+import { verificarSesion, soloAdmin } from '/js/components/http.global.js';
 import {
   getSucursales,
   createSucursal,
   updateSucursal,
   deleteSucursal
 } from '/js/API/api.sucursales.js';
+
+verificarSesion();
+soloAdmin();
 
 console.log('Token actual:', localStorage.getItem('token'));
 console.log('sucursales.js cargado');
