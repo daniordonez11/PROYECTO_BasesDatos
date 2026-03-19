@@ -6,7 +6,6 @@ import {
   updateServicio,
   deleteServicio
 } from '/js/API/api.servicios.js';
-import { soloAdmin } from '../components/http.global';
 
 verificarSesion();
 soloAdmin();
